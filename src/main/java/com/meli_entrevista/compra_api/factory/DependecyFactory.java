@@ -1,5 +1,6 @@
 package com.meli_entrevista.compra_api.factory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,5 +12,10 @@ public class DependecyFactory {
     @Bean
     public HttpClient buildHttpClient() {
         return HttpClient.newHttpClient();
+    }
+
+    @Bean
+    public ObjectMapper buildObjectMapper() {
+        return new ObjectMapper();
     }
 }
