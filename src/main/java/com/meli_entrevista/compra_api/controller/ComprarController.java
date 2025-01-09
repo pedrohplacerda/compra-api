@@ -27,6 +27,6 @@ public class ComprarController {
     public ResponseEntity<MensagemCompra> comprar(@RequestBody CompraRequestBody requestBody) throws URISyntaxException, IOException, InterruptedException {
         Double saldoAtualizado = service.comprarProduto(requestBody.getIdProduto(), requestBody.getIdUsuario(), requestBody.getQuantidade());
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON)
-                .body(new MensagemCompra("Compra efetuada com sucesso!", StatusCompraEnum.AGUARDANDO_PAGAMENTO, saldoAtualizado));
+                .body(new MensagemCompra("Compra efetuada com sucesso!", StatusCompraEnum.PAGAMENTO_CONCLUIDO, saldoAtualizado));
     }
 }
