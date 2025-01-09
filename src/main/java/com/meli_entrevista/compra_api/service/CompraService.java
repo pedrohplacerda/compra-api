@@ -39,19 +39,34 @@ public class CompraService {
         usuarioService.atualizarUsuario(idUsuario, saldoAtualizado);
         LocalDateTime data = LocalDateTime.now();
         boolean pago = true;
-        Compra compra = new Compra();
-        compra.setData(data);
-        compra.setPago(pago);
+        Compra compra = getCompra(data, pago);
         Compra savedCompra = compraRepository.save(compra);
-        CompraUsuarioId compraUsuarioId = new CompraUsuarioId();
-        compraUsuarioId.setIdUsuario(idUsuario);
-        compraUsuarioId.setIdCompra(savedCompra.getId());
+        CompraUsuarioId compraUsuarioId = getCompraUsuarioId(idUsuario, savedCompra);
+        CompraUsuario compraUsuario = getCompraUsuario(compraUsuarioId, valorFinal, data, pago);
+        compraUsuarioService.save(compraUsuario);
+        return saldoAtualizado;
+    }
+
+    private static CompraUsuario getCompraUsuario(CompraUsuarioId compraUsuarioId, Integer valorFinal, LocalDateTime data, boolean pago) {
         CompraUsuario compraUsuario = new CompraUsuario();
         compraUsuario.setId(compraUsuarioId);
         compraUsuario.setValor(BigDecimal.valueOf(valorFinal));
         compraUsuario.setData(data);
         compraUsuario.setPago(pago);
-        compraUsuarioService.save(compraUsuario);
-        return saldoAtualizado;
+        return compraUsuario;
+    }
+
+    private static CompraUsuarioId getCompraUsuarioId(Integer idUsuario, Compra savedCompra) {
+        CompraUsuarioId compraUsuarioId = new CompraUsuarioId();
+        compraUsuarioId.setIdUsuario(idUsuario);
+        compraUsuarioId.setIdCompra(savedCompra.getId());
+        return compraUsuarioId;
+    }
+
+    private static Compra getCompra(LocalDateTime data, boolean pago) {
+        Compra compra = new Compra();
+        compra.setData(data);
+        compra.setPago(pago);
+        return compra;
     }
 }
