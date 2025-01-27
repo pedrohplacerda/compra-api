@@ -1,8 +1,6 @@
 package com.entrevista.compra_api.handler;
 
-import com.entrevista.compra_api.exception.ProdutoNaoEncontradoException;
-import com.entrevista.compra_api.exception.SaldoInsuficienteException;
-import com.entrevista.compra_api.exception.UsuarioNaoEncontradoException;
+import com.entrevista.compra_api.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,5 +23,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UsuarioNaoEncontradoException.class)
     public ResponseEntity<String> usuarioNaoEncontradoExceptionHandler(UsuarioNaoEncontradoException exception) {
         return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body("Usuário não encontrado.");
+    }
+
+    @ExceptionHandler(TokenCreationException.class)
+    public ResponseEntity<String> jwtCreationExceptionHandler(TokenCreationException exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar token JWT.");
+    }
+
+    @ExceptionHandler(TokenInvalidException.class)
+    public ResponseEntity<String> tokenInvalidExceptionHandler(TokenInvalidException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token inválido.");
     }
 }
