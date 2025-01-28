@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.meli-entrevista</groupId>
-    <artifactId>compra-api</artifactId>
+    <artifactId>purchase-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>compra-api</name>
+    <name>purchase-api</name>
     <description>Usuário API</description>
     <url/>
     <licenses>
