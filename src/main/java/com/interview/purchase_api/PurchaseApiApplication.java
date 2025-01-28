@@ -1,13 +1,13 @@
-package com.entrevista.compra_api;
+package com.interview.purchase_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CompraApiApplication {
+public class PurchaseApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CompraApiApplication.class, args);
+        SpringApplication.run(PurchaseApiApplication.class, args);
     }
 
 }
